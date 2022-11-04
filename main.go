@@ -4,7 +4,7 @@ package main
 // SDK路径 C:\Users\zhaobi\AppData\Local\Android\Sdk
 // go install fyne.io/fyne/v2/cmd/fyne@latest
 // fyne package -os android -appID org.zhaobi.transmissionclient
-// fyne package -os windows -icon myapp.png
+// fyne package -os windows -icon Icon.png
 
 import (
 	"context"
@@ -74,7 +74,7 @@ var gui_dlListVBox *widget.List
 var gui_titleLabel *widget.Label
 
 func main() {
-	g_app := app.NewWithID("org.zhaobi.transmissiondesktop")
+	g_app := app.NewWithID("org.zhaobi.transmissionclient")
 
 	g_app.Settings().SetTheme(&myTheme{})
 	//g_app.SetIcon(resourceIconPng)
