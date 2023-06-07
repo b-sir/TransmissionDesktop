@@ -35,7 +35,7 @@ func (c *transmissionClient) InitClient(iIp string, iPort int, iUsername string,
 	}
 
 	if !ok {
-		return fmt.Errorf("Remote transmission RPC version (v%d) is incompatible with the transmission library (v%d): remote needs at least v%d",
+		return fmt.Errorf("remote transmission RPC version (v%d) is incompatible with the transmission library (v%d): remote needs at least v%d",
 			serverVersion, transmissionrpc.RPCVersion, serverMinimumVersion)
 	}
 

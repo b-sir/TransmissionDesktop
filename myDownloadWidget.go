@@ -116,11 +116,42 @@ func (r *myDownloadWidgetRenderer) updateBar() {
 		desc := fmt.Sprintf("(%s/s)[%s/%s]  %.2f%%", speed, downloadSize, *totalSize, prec*100)
 		r.mainLabel.Text = fname
 		r.tipsLabel.Text = desc
-
+		r.barBg.FillColor = color.NRGBA{R: 0x0, G: 0xff, B: 0x0, A: 0x1c} //00FF00
 		r.bar.Resize(fyne.NewSize(mainAreaSize.Width*prec, 2))
+	} else if *torrent.Status == transmissionrpc.TorrentStatusSeed {
+		r.mainLabel.Text = fname
+		r.tipsLabel.Text = fmt.Sprintf("[%s] seeding ...", *totalSize)
+		r.barBg.FillColor = color.NRGBA{R: 0x88, G: 0xf6, B: 0xe9, A: 0x1c} //88F6E9
+		r.bar.Resize(fyne.NewSize(mainAreaSize.Width, 2))
+	} else if *torrent.Status == transmissionrpc.TorrentStatusSeedWait {
+		r.mainLabel.Text = fname
+		r.tipsLabel.Text = fmt.Sprintf("[%s] seed wait ...", *totalSize)
+		r.barBg.FillColor = color.NRGBA{R: 0x88, G: 0xf6, B: 0xe9, A: 0x1c} //88F6E9
+		r.bar.Resize(fyne.NewSize(mainAreaSize.Width, 2))
+	} else if *torrent.Status == transmissionrpc.TorrentStatusStopped {
+		r.mainLabel.Text = fname
+		r.tipsLabel.Text = "stopped ..."
+		r.barBg.FillColor = color.NRGBA{R: 0xff, G: 0xa2, B: 0x3e, A: 0x1c} //FFA23E
+		r.bar.Resize(fyne.NewSize(mainAreaSize.Width, 2))
+	} else if *torrent.Status == transmissionrpc.TorrentStatusCheckWait {
+		r.mainLabel.Text = fname
+		r.tipsLabel.Text = "Check wait ..."
+		r.barBg.FillColor = color.NRGBA{R: 0xff, G: 0xa2, B: 0x3e, A: 0x1c} //FFA23E
+		r.bar.Resize(fyne.NewSize(mainAreaSize.Width, 2))
+	} else if *torrent.Status == transmissionrpc.TorrentStatusDownloadWait {
+		r.mainLabel.Text = fname
+		r.tipsLabel.Text = "Download wait ..."
+		r.barBg.FillColor = color.NRGBA{R: 0xff, G: 0xa2, B: 0x3e, A: 0x1c} //FFA23E
+		r.bar.Resize(fyne.NewSize(mainAreaSize.Width, 2))
+	} else if *torrent.Status == transmissionrpc.TorrentStatusIsolated {
+		r.mainLabel.Text = fname
+		r.tipsLabel.Text = "Isolated ..."
+		r.barBg.FillColor = color.NRGBA{R: 0xff, G: 0xa2, B: 0x3e, A: 0x1c} //FFA23E
+		r.bar.Resize(fyne.NewSize(mainAreaSize.Width, 2))
 	} else {
 		r.mainLabel.Text = fname
-		r.tipsLabel.Text = "seeding ..."
+		r.tipsLabel.Text = "error ..."
+		r.barBg.FillColor = color.NRGBA{R: 0xff, G: 0xa2, B: 0x3e, A: 0x1c} //FFA23E
 		r.bar.Resize(fyne.NewSize(mainAreaSize.Width, 2))
 	}
 }
